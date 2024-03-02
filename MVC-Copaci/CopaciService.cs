@@ -72,5 +72,39 @@ namespace MVC_Copaci
             }
             return listaCopaciByInaltime;
         }
+
+        //metoda ce returneaza o list unde totalul varstelor copaciilor sa fie de 25
+        public List <Copaci> FilterCopaciByLimits(int varstaMax)
+        {
+            List <Copaci> copacis = new List<Copaci>();
+            int suma = 0;
+            foreach(Copaci x in CopaciList)
+            {
+                if (suma + x.varsta <= varstaMax)
+                {
+                    copacis.Add(x);
+                    suma += x.varsta;
+                }
+            }
+            return copacis;
+        }
+
+
+
+
+        //CRUD
+        public bool EditTreeThickness(string specie, int newThickness)
+        {
+            foreach (Copaci x in CopaciList)
+            {
+                if (x.specie == specie)
+                {
+                    x.grosime = newThickness; 
+                    return true;
+                }
+            }
+            return false; 
+        }
+
     }
 }

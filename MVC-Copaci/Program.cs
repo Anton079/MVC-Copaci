@@ -9,9 +9,11 @@ internal class Program
 
         service.LoadData();
 
-        service.AfisareCopaci();
 
-
-
+        List<Copaci> Copacis = service.FilterCopaciByLimits(25);
+        foreach(Copaci x in Copacis)
+        {
+            Console.WriteLine(x.CopaciInfo());
+        }
     }
 }
