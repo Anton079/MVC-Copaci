@@ -50,13 +50,6 @@ namespace MVC_Copaci
             this.CopaciList.Add(copac5);
         }
 
-        public void AfisareCopaci()
-        {
-            foreach(Copaci x in CopaciList)
-            {
-                Console.WriteLine(x.CopaciInfo());
-            }
-        }
 
         //metoda ce retuneaza o lista cu toti copacii de o anumita inaltime
         public List<Copaci> FilterCopaciByInaltime(int inaltime)
@@ -89,10 +82,6 @@ namespace MVC_Copaci
             return copacis;
         }
 
-
-
-
-        //CRUD
         public bool EditTreeThickness(string specie, int newThickness)
         {
             foreach (Copaci x in CopaciList)
@@ -104,6 +93,48 @@ namespace MVC_Copaci
                 }
             }
             return false; 
+        }
+
+        //CRUD
+        public void AfisareCopaci()
+        {
+            foreach(Copaci x in CopaciList)
+            {
+                Console.WriteLine(x.CopaciInfo());
+            }
+        }
+
+        public int FindCopacBySpecie(string specieCautata)
+        {
+            for(int i = 0; i < CopaciList.Count; i++)
+            {
+                if (CopaciList[i].specie == specieCautata)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public bool AddCopacInList(Copaci CopacNou)
+        {
+            if (FindCopacBySpecie(CopacNou.specie) == -1)
+            {
+                this.CopaciList.Add(CopacNou);
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemoveCopacBySpecie(string CopacCautat)
+        {
+            int CopaculCautat = FindCopacBySpecie(CopacCautat);
+            if(CopaculCautat != -1)
+            {
+                CopaciList.RemoveAt(CopaculCautat);
+                return true;
+            }
+            return false;
         }
 
     }
