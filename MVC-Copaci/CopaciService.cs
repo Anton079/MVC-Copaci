@@ -137,5 +137,27 @@ namespace MVC_Copaci
             return false;
         }
 
+        //View
+        public bool AfisareCopaciInalti(int inaltimeCop)
+        {
+            for (int i = 0;i < CopaciList.Count;i++)
+            {
+                if (CopaciList[i].inaltime == inaltimeCop) 
+                {
+                    Console.WriteLine(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //public bool AfisareCopaciBySpecie()
+        //{
+        //    for(int i = 0; i < CopaciList.Count; i++)
+        //    {
+        //        if(copaciL)
+        //    }
+        //}
+
     }
 }
