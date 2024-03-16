@@ -159,5 +159,32 @@ namespace MVC_Copaci
         //    }
         //}
 
+        //Edit
+        public bool EditCopaciInaltime(string copacAles,int newInaltime)
+        {
+            foreach (Copaci x in CopaciList)
+            {
+                if (x.specie.Equals(copacAles))
+                {
+                    x.inaltime = newInaltime;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool EditCopaciVarsta(string copacAles, int newVarsta)
+        {
+            foreach (Copaci x in CopaciList)
+            {
+                if (x.specie.Equals(copacAles))
+                {
+                    x.varsta = newVarsta;
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

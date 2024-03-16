@@ -12,9 +12,13 @@ namespace MVC_Copaci
 
         public void Meniu()
         {
-            Console.WriteLine("Apsati 1 pentru a afisa toti copacii!");
-            Console.WriteLine("Apasati 2 pentru a afisa toti copacii de o anumita inaltime");
-            Console.WriteLine("Apasati 3 pentru a afisa toti copacii de aceasi specie");
+            Console.WriteLine("Apasati 1 pentru a afisa toti copacii!");
+            Console.WriteLine("Apasati 2 pentru a adauga un copac in lista");
+            Console.WriteLine("Apasati 3 pentru a da remove la un copac");
+            Console.WriteLine("Apasati 4 pentru a edita inaltimea unui copac");
+            Console.WriteLine("Apasati 5 pentru a edita varsta unui copac");
+            Console.WriteLine("Apasati 6 pentru a afisa toti copacii de o anumita inaltime");
+            Console.WriteLine("Apasati 7 pentru a afisa toti copacii de aceasi specie");
         }
 
         public void Play()
@@ -32,20 +36,111 @@ namespace MVC_Copaci
                     case "1":
                         copaciService.AfisareCopaci(); 
                         break;
+
                     case "2":
-                        copaciService.AfisareCopaciByInaltime();
+                        AdaugareaUnuiAnimal();
                         break;
+
+                    case "3":
+                        StergereaUnuiCopac();
+                        break;
+
+                    case "4":
+                        EditInaltimeCopaci();
+                        break;
+
+                    case "5":
+                        EditAgeCopac();
+                        break;
+
                 }
             }
         }
 
-        public void AfisareCopaciByInaltime()
+        public void AdaugareaUnuiAnimal()
         {
-            Console.WriteLine("Introduceti inaltimea pe care o cautati la copaci");
+            Console.WriteLine("Inaltimea copacului");
+            int inaltimeNou = Int32.Parse(Console.ReadLine());
 
-            string inaltimeCop = Console.ReadLine();
+            Console.WriteLine("Tipul de copac");
+            string specieNou = Console.ReadLine();
 
-            int poz = copaciService.AfisareCopaciInalti(inaltimeCop);
+            Console.WriteLine("varsta");
+            int varstaNou = Int32.Parse(Console.ReadLine());
+
+            Console.WriteLine("Greutate");
+            int greutateNou = Int32.Parse(Console.ReadLine());
+
+            Copaci copac6 = new Copaci();
+            copac6.inaltime = inaltimeNou;
+            copac6.specie = specieNou;
+            copac6.varsta = varstaNou;
+            copac6.grosime = greutateNou;               
+
+            Console.WriteLine("Copacul a fost adaugat cu succes");
         }
+
+        public void StergereaUnuiCopac()
+        {
+            Console.WriteLine("Din lista de mai jos ce copac doiriti sa stergeti");
+            copaciService.AfisareCopaci();
+            string CopacDorite = Console.ReadLine();
+
+            if (copaciService.FindCopacBySpecie(CopacDorite) != -1)
+            {
+                copaciService.RemoveCopacBySpecie(CopacDorite);
+                Console.WriteLine("Copacul a fost sters!");
+            }
+            else
+            {
+                Console.WriteLine("Copacul nu exista");
+
+            }
+        }
+
+        public void EditInaltimeCopaci()
+        {
+            Console.WriteLine("Ce copac doriti sa editati");
+            string copacAles = Console.ReadLine();
+
+            Console.WriteLine("Cu ce inaltime doriti sa modificati copacul");
+            int copaciNewHigh = Int32.Parse(Console.ReadLine());
+
+            if (copaciService.EditCopaciInaltime(copacAles, copaciNewHigh))
+            {
+                Console.WriteLine("Copacul a fost editat cu succes");
+            }
+            else
+            {
+                Console.WriteLine("Copacul nu a putut fi editat");
+            }
+        }
+
+        public void EditAgeCopac()
+        {
+            Console.WriteLine("Ce copac doriti sa editati");
+            string copacAles = Console.ReadLine();
+
+            Console.WriteLine("Cu ce varsta doriti sa modificati copacul");
+            int copaciNewAge = Int32.Parse(Console.ReadLine());
+
+            if (copaciService.EditCopaciInaltime(copacAles, copaciNewAge))
+            {
+                Console.WriteLine("Copacul a fost editat cu succes");
+            }
+            else
+            {
+                Console.WriteLine("Copacul nu a putut fi editat");
+            }
+        }
+
+        //public void AfisareCopaciByInaltime()
+        //{
+        //    Console.WriteLine("Introduceti inaltimea pe care o cautati la copaci");
+
+        //    string inaltimeCop = Console.ReadLine();
+
+        //    int poz = copaciService.AfisareCopaciInalti(inaltimeCop);
+        //}
     }
 }
