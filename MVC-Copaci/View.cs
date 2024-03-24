@@ -8,7 +8,12 @@ namespace MVC_Copaci
 {
     public class View
     {
-        CopaciService copaciService = new CopaciService();
+        private CopaciService _copaciService;
+
+        public View()
+        {
+            _copaciService = new CopaciService();
+        }
 
         public void Meniu()
         {
@@ -25,7 +30,7 @@ namespace MVC_Copaci
         {
             bool running = true;
 
-            copaciService.LoadData();
+            _copaciService.LoadData();
             while(running)
             {
                 Meniu();
@@ -34,7 +39,7 @@ namespace MVC_Copaci
                 switch(alegere)
                 {
                     case "1":
-                        copaciService.AfisareCopaci(); 
+                        _copaciService.AfisareCopaci(); 
                         break;
 
                     case "2":
@@ -72,10 +77,10 @@ namespace MVC_Copaci
             int greutateNou = Int32.Parse(Console.ReadLine());
 
             Copaci copac6 = new Copaci();
-            copac6.inaltime = inaltimeNou;
-            copac6.specie = specieNou;
-            copac6.varsta = varstaNou;
-            copac6.grosime = greutateNou;               
+            copac6.Inaltime = inaltimeNou;
+            copac6.Specie = specieNou;
+            copac6.Varsta = varstaNou;
+            copac6.Grosime = greutateNou;               
 
             Console.WriteLine("Copacul a fost adaugat cu succes");
         }
@@ -83,12 +88,12 @@ namespace MVC_Copaci
         public void StergereaUnuiCopac()
         {
             Console.WriteLine("Din lista de mai jos ce copac doiriti sa stergeti");
-            copaciService.AfisareCopaci();
+            _copaciService.AfisareCopaci();
             string CopacDorite = Console.ReadLine();
 
-            if (copaciService.FindCopacBySpecie(CopacDorite) != -1)
+            if (_copaciService.FindCopacBySpecie(CopacDorite) != -1)
             {
-                copaciService.RemoveCopacBySpecie(CopacDorite);
+                _copaciService.RemoveCopacBySpecie(CopacDorite);
                 Console.WriteLine("Copacul a fost sters!");
             }
             else
@@ -106,7 +111,7 @@ namespace MVC_Copaci
             Console.WriteLine("Cu ce inaltime doriti sa modificati copacul");
             int copaciNewHigh = Int32.Parse(Console.ReadLine());
 
-            if (copaciService.EditCopaciInaltime(copacAles, copaciNewHigh))
+            if (_copaciService.EditCopaciInaltime(copacAles, copaciNewHigh))
             {
                 Console.WriteLine("Copacul a fost editat cu succes");
             }
@@ -124,7 +129,7 @@ namespace MVC_Copaci
             Console.WriteLine("Cu ce varsta doriti sa modificati copacul");
             int copaciNewAge = Int32.Parse(Console.ReadLine());
 
-            if (copaciService.EditCopaciInaltime(copacAles, copaciNewAge))
+            if (_copaciService.EditCopaciInaltime(copacAles, copaciNewAge))
             {
                 Console.WriteLine("Copacul a fost editat cu succes");
             }

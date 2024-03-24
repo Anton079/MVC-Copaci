@@ -9,45 +9,51 @@ namespace MVC_Copaci
 {
     public class CopaciService
     {
-        public List <Copaci> CopaciList = new List <Copaci> ();
+        private List<Copaci> _CopaciList;
+
+        public CopaciService()
+        {
+            _CopaciList = new List<Copaci>();
+            this.LoadData();
+        }
 
         public void LoadData()
         {
             Copaci copac1 = new Copaci ();
-            copac1.grosime = 1;
-            copac1.varsta = 2;
-            copac1.specie = "Stejar";
-            copac1.inaltime = 5;
+            copac1.Grosime = 1;
+            copac1.Varsta = 2;
+            copac1.Specie = "Stejar";
+            copac1.Inaltime = 5;
 
             Copaci copac2 = new Copaci ();
-            copac2.grosime = 3;
-            copac2.varsta = 4;
-            copac2.specie = "Molid";
-            copac2.inaltime = 5;
+            copac2.Grosime = 3;
+            copac2.Varsta = 4;
+            copac2.Specie = "Molid";
+            copac2.Inaltime = 5;
 
             Copaci copac3 = new Copaci ();
-            copac3.grosime = 7;
-            copac3.varsta = 8;
-            copac3.specie = "Artar";
-            copac3.inaltime = 9;
+            copac3.Grosime = 7;
+            copac3.Varsta = 8;
+            copac3.Specie = "Artar";
+            copac3.Inaltime = 9;
 
             Copaci copac4 = new Copaci ();
-            copac4.grosime = 10;
-            copac4.varsta = 11;
-            copac4.specie = "pin";
-            copac4.inaltime = 12;
+            copac4.Grosime = 10;
+            copac4.Varsta = 11;
+            copac4.Specie = "pin";
+            copac4.Inaltime = 12;
 
             Copaci copac5 = new Copaci ();
-            copac5.varsta = 13;
-            copac5.specie = "Mesteacan";
-            copac5.inaltime = 14;
-            copac5.grosime = 15;
+            copac5.Varsta = 13;
+            copac5.Specie = "Mesteacan";
+            copac5.Inaltime = 14;
+            copac5.Grosime = 15;
 
-            this.CopaciList.Add(copac1);
-            this.CopaciList.Add(copac2);
-            this.CopaciList.Add(copac3);
-            this.CopaciList.Add(copac4);
-            this.CopaciList.Add(copac5);
+            this._CopaciList.Add(copac1);
+            this._CopaciList.Add(copac2);
+            this._CopaciList.Add(copac3);
+            this._CopaciList.Add(copac4);
+            this._CopaciList.Add(copac5);
         }
 
 
@@ -56,9 +62,9 @@ namespace MVC_Copaci
         {
             List <Copaci> listaCopaciByInaltime = new List<Copaci>();
 
-            foreach(Copaci x in CopaciList)
+            foreach(Copaci x in _CopaciList)
             {
-                if (inaltime.Equals(x.inaltime))
+                if (inaltime.Equals(x.Inaltime))
                 {
                      listaCopaciByInaltime.Add(x);
                 }
@@ -71,12 +77,12 @@ namespace MVC_Copaci
         {
             List <Copaci> copacis = new List<Copaci>();
             int suma = 0;
-            foreach(Copaci x in CopaciList)
+            foreach(Copaci x in _CopaciList)
             {
-                if (suma + x.varsta <= varstaMax)
+                if (suma + x.Varsta <= varstaMax)
                 {
                     copacis.Add(x);
-                    suma += x.varsta;
+                    suma += x.Varsta;
                 }
             }
             return copacis;
@@ -84,11 +90,11 @@ namespace MVC_Copaci
 
         public bool EditTreeThickness(string specie, int newThickness)
         {
-            foreach (Copaci x in CopaciList)
+            foreach (Copaci x in _CopaciList)
             {
-                if (x.specie == specie)
+                if (x.Specie == specie)
                 {
-                    x.grosime = newThickness; 
+                    x.Grosime = newThickness; 
                     return true;
                 }
             }
@@ -98,7 +104,7 @@ namespace MVC_Copaci
         //CRUD
         public void AfisareCopaci()
         {
-            foreach(Copaci x in CopaciList)
+            foreach(Copaci x in _CopaciList)
             {
                 Console.WriteLine(x.CopaciInfo());
             }
@@ -106,9 +112,9 @@ namespace MVC_Copaci
 
         public int FindCopacBySpecie(string specieCautata)
         {
-            for(int i = 0; i < CopaciList.Count; i++)
+            for(int i = 0; i < _CopaciList.Count; i++)
             {
-                if (CopaciList[i].specie == specieCautata)
+                if (_CopaciList[i].Specie == specieCautata)
                 {
                     return i;
                 }
@@ -118,9 +124,9 @@ namespace MVC_Copaci
 
         public bool AddCopacInList(Copaci CopacNou)
         {
-            if (FindCopacBySpecie(CopacNou.specie) == -1)
+            if (FindCopacBySpecie(CopacNou.Specie) == -1)
             {
-                this.CopaciList.Add(CopacNou);
+                this._CopaciList.Add(CopacNou);
                 return true;
             }
             return false;
@@ -131,7 +137,7 @@ namespace MVC_Copaci
             int CopaculCautat = FindCopacBySpecie(CopacCautat);
             if(CopaculCautat != -1)
             {
-                CopaciList.RemoveAt(CopaculCautat);
+                _CopaciList.RemoveAt(CopaculCautat);
                 return true;
             }
             return false;
@@ -140,9 +146,9 @@ namespace MVC_Copaci
         //View
         public bool AfisareCopaciInalti(int inaltimeCop)
         {
-            for (int i = 0;i < CopaciList.Count;i++)
+            for (int i = 0;i < _CopaciList.Count;i++)
             {
-                if (CopaciList[i].inaltime == inaltimeCop) 
+                if (_CopaciList[i].Inaltime == inaltimeCop) 
                 {
                     Console.WriteLine(i);
                     return true;
@@ -162,11 +168,11 @@ namespace MVC_Copaci
         //Edit
         public bool EditCopaciInaltime(string copacAles,int newInaltime)
         {
-            foreach (Copaci x in CopaciList)
+            foreach (Copaci x in _CopaciList)
             {
-                if (x.specie.Equals(copacAles))
+                if (x.Specie.Equals(copacAles))
                 {
-                    x.inaltime = newInaltime;
+                    x.Inaltime = newInaltime;
                     return true;
                 }
             }
@@ -175,11 +181,11 @@ namespace MVC_Copaci
 
         public bool EditCopaciVarsta(string copacAles, int newVarsta)
         {
-            foreach (Copaci x in CopaciList)
+            foreach (Copaci x in _CopaciList)
             {
-                if (x.specie.Equals(copacAles))
+                if (x.Specie.Equals(copacAles))
                 {
-                    x.varsta = newVarsta;
+                    x.Varsta = newVarsta;
                     return true;
                 }
             }
